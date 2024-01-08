@@ -4,8 +4,11 @@ import HomePage from "./routes/HomePage";
 import ProfilePage from "./routes/ProfilePage";
 import ErrorPage from "./routes/ErrorPage";
 import { QueryClient, QueryClientProvider } from "react-query";
-import SignIn from "./routes/SignIn";
-
+import { loginUser, setLoading } from "./redux/authSlice";
+import { useEffect } from "react";
+import { auth } from "./firebase";
+import { useDispatch, useSelector } from "react-redux";
+import Authenticate from "./components/authenticate/Authenticate";
 const queryClient = new QueryClient();
 
 const AppLayout = () => {
@@ -30,14 +33,29 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <ProfilePage queryClient={queryClient} />,
       },
-      // {
-      //   path: "/habit-tracker/profile",
-      //   element: <ProfilePage />,
-      // },
     ],
   },
 ]);
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(
+          loginUser({
+            uid: authUser.uid,
+            username: authUser.displayName,
+            email: authUser.email,
+          })
+        );
+        dispatch(setLoading(false));
+      } else {
+        dispatch(setLoading(false));
+        console.log("User is not logged in.");
+      }
+    });
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />

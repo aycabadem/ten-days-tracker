@@ -1,8 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import habitReducer from "./habitSlice";
+import { habitSlice } from "./habitSlice";
+import { combineReducers } from "@reduxjs/toolkit";
+import { userSlice } from "./authSlice";
+
+const reducers = combineReducers({
+  user: userSlice.reducer,
+  habit: habitSlice.reducer,
+});
 
 export const store = configureStore({
-  reducer: {
-    habit: habitReducer,
-  },
+  reducer: reducers,
 });
+
+// export const store = configureStore({
+//   reducer: {
+//     habit: habitReducer,
+//   },
+// });
