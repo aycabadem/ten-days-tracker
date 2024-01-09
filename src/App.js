@@ -3,15 +3,17 @@ import Navbar from "./components/Navbar";
 import HomePage from "./routes/HomePage";
 import ProfilePage from "./routes/ProfilePage";
 import ErrorPage from "./routes/ErrorPage";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { loginUser, setLoading } from "./redux/authSlice";
 import { useEffect } from "react";
 import { auth } from "./firebase";
-import { useDispatch } from "react-redux";
-
-const queryClient = new QueryClient();
+import { useDispatch, useSelector } from "react-redux";
+import Authenticate from "./components/authenticate/Authenticate";
 
 const AppLayout = () => {
+  const user = useSelector((state) => state.user.user);
+  if (user === null) {
+    return <Authenticate />;
+  }
   return (
     <>
       <Navbar />
@@ -57,11 +59,7 @@ function App() {
     });
   }, [dispatch]);
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

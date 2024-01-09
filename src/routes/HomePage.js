@@ -23,7 +23,7 @@ const HomePage = () => {
       setNewHabit("");
       setStartDate("");
     } else {
-      alert("Habit ve başlangıç tarihi boş olamaz");
+      alert("Habit ve baslangic tarihi bos olamaz");
     }
   };
 
