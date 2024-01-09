@@ -6,7 +6,7 @@
   
   .navbar {
     margin-bottom: 20px;
-    background: #025c78;
+    background: #2a914e;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -41,11 +41,9 @@
     font-size: 2rem;
     display: flex;
     align-items: center;
+    font-weight: bold;
   }
-  
-  .navbar-icon {
-    margin-right: 0.5rem;
-  }
+ 
   
   .nav-menu {
     display: flex;
@@ -62,7 +60,7 @@
   }
   
   .nav-item:hover {
-    border-bottom: 2px solid #09bef0;
+    border-bottom: 2px solid #d1e8d9;
   }
   
   .nav-links {
@@ -75,83 +73,23 @@
   }
   
   .activated {
-    color: #09bef0;
+    color: #d1e8d9;
   }
   
-  .fa-bars {
-    color: #fff;
-  }
-  
-  .menu-icon {
-    display: none;
-  }
-  
-  @media screen and (max-width: 960px) {
-    .NavbarItems {
-      position: relative;
-    }
-  
-    .nav-menu {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: 80px;
-      left: -100%;
-      opacity: 1;
-      transition: all 0.5s ease;
-    }
-  
-    .nav-menu.active {
-      background: #19191a;
-      left: 0;
-      opacity: 1;
-      transition: all 0.6s ease;
-      z-index: 1;
-    }
-  
-    .nav-links {
-      text-align: center;
-      padding: 2rem;
-      width: 100%;
-      display: table;
-    }
-  
-    .nav-links:hover {
-      color: #09bef0;
-      transform: scale(1.2);
-      transition: all 0.3s ease;
-    }
-  
-    .nav-item:hover {
-      border: none;
-    }
-  
-    .nav-item {
-      width: 100%;
-    }
-  
-    /* .navbar-logo {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: translate(25%, 50%);
-    }
-  
-    .menu-icon {
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(-100%, 60%);
-      font-size: 1.8rem;
-      cursor: pointer;
-    } */
-   
-  } 
+
+ 
   .navbar-button{
         margin-right: 20px;
         height: 40px;
-        
-        
+        width: 60px;
+        border-radius: 1rem;
+        border: 1px solid grey;
+        background-color: #d1e8d9;
+        font-weight: bold;
+        color:#2a914e;
+    }
+
+    .navbar-button:hover{
+        background-color: #2a914e;
+        color: #fff;
     }

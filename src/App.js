@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { loginUser, setLoading } from "./redux/authSlice";
 import { useEffect } from "react";
 import { auth } from "./firebase";
-import { useDispatch, useSelector } from "react-redux";
-import Authenticate from "./components/authenticate/Authenticate";
+import { useDispatch } from "react-redux";
+
 const queryClient = new QueryClient();
 
 const AppLayout = () => {
@@ -27,11 +27,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage queryClient={queryClient} />,
+        element: <HomePage />,
       },
       {
         path: "/profile",
-        element: <ProfilePage queryClient={queryClient} />,
+        element: <ProfilePage />,
       },
     ],
   },
@@ -55,7 +55,8 @@ function App() {
         console.log("User is not logged in.");
       }
     });
-  }, []);
+  }, [dispatch]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
