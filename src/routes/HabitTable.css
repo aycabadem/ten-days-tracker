@@ -1,0 +1,15 @@
+.page-container {
+ display: flex;
+ flex-direction: column;
+ height: 100vh;
+}
+
+.upper-div {
+ flex: 1;
+ background-color: blue;
+}
+
+.lower-div {
+ flex: 10;
+ background-color: red;
+}

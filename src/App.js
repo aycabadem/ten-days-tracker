@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Authenticate from "./components/authenticate/Authenticate";
+import BasicTable from "./routes/HabitTable";
 
 const AppLayout = () => {
   const user = useSelector((state) => state.user.user);
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <BasicTable />,
       },
       {
         path: "/profile",
