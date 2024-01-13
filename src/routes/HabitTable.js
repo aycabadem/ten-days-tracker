@@ -53,7 +53,9 @@ export default function BasicTable() {
             return;
         }
 
-        const newRow = createData(habitName, <CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>,<CustomCheckbox/>);
+        const newRow = createData(habitName, <CustomCheckbox/>, <CustomCheckbox/>, <CustomCheckbox/>, <CustomCheckbox/>,
+            <CustomCheckbox/>, <CustomCheckbox/>, <CustomCheckbox/>, <CustomCheckbox/>, <CustomCheckbox/>,
+            <CustomCheckbox/>);
         setTableRows((prevRows) => [...prevRows, newRow]);
         setHabitName("");
     };
@@ -74,66 +76,61 @@ export default function BasicTable() {
 
             </div>
             <div className="lower-div">
-        <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>
-                            <input
-                            type="text"
-                            placeholder="Habit name"
-                            value={habitName}
-                            onChange={(e) => setHabitName(e.target.value)}
-                        />
-                            <button onClick={handleAddHabit}>Add Habit</button>
-                        </TableCell>
-                        <TableCell align="right">Day1</TableCell>
-                        <TableCell align="right">Day2</TableCell>
-                        <TableCell align="right">Day3</TableCell>
-                        <TableCell align="right">Day4</TableCell>
-                        <TableCell align="right">Day5</TableCell>
+                <TableContainer component={Paper}>
+                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>
+                                    <input
+                                        type="text"
+                                        placeholder="Habit name"
+                                        value={habitName}
+                                        onChange={(e) => setHabitName(e.target.value)}
+                                    />
+                                    <button onClick={handleAddHabit}>Add Habit</button>
+                                </TableCell>
+                                <TableCell align="right">Day1</TableCell>
+                                <TableCell align="right">Day2</TableCell>
+                                <TableCell align="right">Day3</TableCell>
+                                <TableCell align="right">Day4</TableCell>
+                                <TableCell align="right">Day5</TableCell>
+                                <TableCell align="right">Day6</TableCell>
+                                <TableCell align="right">Day7</TableCell>
+                                <TableCell align="right">Day8</TableCell>
+                                <TableCell align="right">Day9</TableCell>
+                                <TableCell align="right">Day10</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {tableRows.map((row, index) => (
+                                <TableRow
+                                    key={row.name}
+                                    sx={{"&:last-child td, &:last-child th": {border: 0}}}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.name}
+                                        <div>
+                                            <button onClick={() => editHabit(index)}>Düzenle</button>
+                                            <button onClick={() => deleteHabit(index)}>Sil</button>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell key={`${row.name}${index}0`} align="right">{row.Day1}</TableCell>
+                                    <TableCell key={`${row.name}${index}1`} align="right">{row.Day2}</TableCell>
+                                    <TableCell key={`${row.name}${index}2`} align="right">{row.Day3}</TableCell>
+                                    <TableCell key={`${row.name}${index}3`} align="right">{row.Day4}</TableCell>
 
-                        <TableCell align="right">Day6</TableCell>
+                                    <TableCell key={`${row.name}${index}5`} align="right">{row.Day5}</TableCell>
+                                    <TableCell key={`${row.name}${index}6`} align="right">{row.Day6}</TableCell>
+                                    <TableCell key={`${row.name}${index}7`} align="right">{row.Day7}</TableCell>
+                                    <TableCell key={`${row.name}${index}8`} align="right">{row.Day8}</TableCell>
+                                    <TableCell key={`${row.name}${index}9`} align="right">{row.Day9}</TableCell>
+                                    <TableCell key={`${row.name}${index}10`} align="right">{row.Day10}</TableCell>
 
-                        <TableCell align="right">Day7</TableCell>
-
-                        <TableCell align="right">Day8</TableCell>
-
-                        <TableCell align="right">Day9</TableCell>
-
-                        <TableCell align="right">Day10</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {tableRows.map((row, index)=> (
-                        <TableRow
-                            key={row.name}
-                            sx={{"&:last-child td, &:last-child th": {border: 0}}}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                                <div>
-                                <button onClick={() => editHabit(index)}>Düzenle</button>
-                                <button onClick={() => deleteHabit(index)}>Sil</button>
-                                </div>
-                            </TableCell>
-                            <TableCell align="right">{row.Day1}</TableCell>
-                            <TableCell align="right">{row.Day2}</TableCell>
-                            <TableCell align="right">{row.Day3}</TableCell>
-                            <TableCell align="right">{row.Day4}</TableCell>
-                            <TableCell align="right">{row.Day4}</TableCell>
-                            <TableCell align="right">{row.Day5}</TableCell>
-                            <TableCell align="right">{row.Day6}</TableCell>
-                            <TableCell align="right">{row.Day7}</TableCell>
-                            <TableCell align="right">{row.Day8}</TableCell>
-                            <TableCell align="right">{row.Day9}</TableCell>
-                            <TableCell align="right">{row.Day10}</TableCell>
-
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
         </div>
     );
