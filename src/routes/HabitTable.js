@@ -57,7 +57,17 @@ export default function BasicTable() {
         setTableRows((prevRows) => [...prevRows, newRow]);
         setHabitName("");
     };
+    const editHabit = (index) => {
+        // Implement editing logic here
+        // You may prompt the user for a new habit name or show an input field
+        // and update the corresponding row in tableRows state
+    };
 
+    const deleteHabit = (index) => {
+        const updatedRows = [...tableRows];
+        updatedRows.splice(index, 1);
+        setTableRows(updatedRows);
+    };
     return (
         <div className="page-container">
             <div className="upper-div">
@@ -68,13 +78,14 @@ export default function BasicTable() {
             <Table sx={{minWidth: 650}} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell> <input
+                        <TableCell>
+                            <input
                             type="text"
                             placeholder="Habit name"
                             value={habitName}
                             onChange={(e) => setHabitName(e.target.value)}
                         />
-                            <button onClick={handleAddHabit}>Habit Ekle</button>
+                            <button onClick={handleAddHabit}>Add Habit</button>
                         </TableCell>
                         <TableCell align="right">Day1</TableCell>
                         <TableCell align="right">Day2</TableCell>
@@ -94,13 +105,17 @@ export default function BasicTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {tableRows.map((row)=> (
+                    {tableRows.map((row, index)=> (
                         <TableRow
                             key={row.name}
                             sx={{"&:last-child td, &:last-child th": {border: 0}}}
                         >
                             <TableCell component="th" scope="row">
                                 {row.name}
+                                <div>
+                                <button onClick={() => editHabit(index)}>Düzenle</button>
+                                <button onClick={() => deleteHabit(index)}>Sil</button>
+                                </div>
                             </TableCell>
                             <TableCell align="right">{row.Day1}</TableCell>
                             <TableCell align="right">{row.Day2}</TableCell>
@@ -113,6 +128,7 @@ export default function BasicTable() {
                             <TableCell align="right">{row.Day8}</TableCell>
                             <TableCell align="right">{row.Day9}</TableCell>
                             <TableCell align="right">{row.Day10}</TableCell>
+
                         </TableRow>
                     ))}
                 </TableBody>
