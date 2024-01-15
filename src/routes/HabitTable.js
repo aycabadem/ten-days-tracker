@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,6 +8,15 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./HabitTable.css";
 import CustomCheckbox from "./checkbox";
+// import {
+//   addHabit,
+//   editHabit,
+//   deleteHabit,
+//   markHabitComplete,
+//   setHabits,
+// } from "../redux/habitSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { firestore, auth } from "../firebase";
 
 function createData(
   name,
@@ -28,15 +37,78 @@ function createData(
 const rows = [];
 
 export default function BasicTable() {
-  const [habitName, setHabitName] = React.useState("");
-  const [tableRows, setTableRows] = React.useState(rows);
-  const [editingIndex, setEditingIndex] = React.useState(-1);
-  const [editedHabitName, setEditedHabitName] = React.useState("");
+  //   const dispatch = useDispatch();
+  //   const userHabits = useSelector((state) => state.habits.userHabits);
+  const [habitName, setHabitName] = useState("");
+  const [tableRows, setTableRows] = useState(rows);
+  const [editingIndex, setEditingIndex] = useState(-1);
+  const [editedHabitName, setEditedHabitName] = useState("");
+
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       const user = auth.currentUser;
+
+  //       if (user) {
+  //         const userId = user.uid;
+
+  //         const habitsCollection = firestore.collection(`users/${userId}/habits`);
+  //         const habitsSnapshot = await habitsCollection.get();
+  //         const habitsData = habitsSnapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           ...doc.data(),
+  //         }));
+
+  //         setTableRows(habitsData);
+
+  //         dispatch(setHabits(habitsData));
+  //       }
+  //     };
+
+  //     fetchData();
+  //   }, [dispatch]);
 
   const handleAddHabit = () => {
     if (habitName.trim() === "") {
       return;
     }
+
+    // const user = auth.currentUser;
+    // if (user) {
+    //   const userId = user.uid;
+
+    //   const habitsCollection = firestore.collection(`users/${userId}/habits`);
+    //   const docRef = habitsCollection.add(
+    //     habitName,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />,
+    //     <CustomCheckbox />
+    //   );
+
+    //   dispatch(
+    //     addHabit({
+    //       id: docRef.id,
+    //       name: habitName,
+    //       Day1: <CustomCheckbox />,
+    //       Day2: <CustomCheckbox />,
+    //       Day3: <CustomCheckbox />,
+    //       Day4: <CustomCheckbox />,
+    //       Day6: <CustomCheckbox />,
+    //       Day7: <CustomCheckbox />,
+    //       Day8: <CustomCheckbox />,
+    //       Day9: <CustomCheckbox />,
+    //       Day10: <CustomCheckbox />,
+    //     })
+    //   );
+
+    //   setHabitName("");
+    // }
 
     const newRow = createData(
       habitName,
@@ -54,6 +126,7 @@ export default function BasicTable() {
     setTableRows((prevRows) => [...prevRows, newRow]);
     setHabitName("");
   };
+
   const handleEditHabit = (index) => {
     setEditingIndex(index);
     setEditedHabitName(tableRows[index].name);

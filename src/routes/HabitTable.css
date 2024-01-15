@@ -19,13 +19,17 @@
 .habitTableCell{
  
    background-color: red;
+   max-width: 200px;
 
 }
 .habitTableCell-lower{
  
-    max-width: 100px;
+
     height: 100%;
+    background-color: gray;
 }
 .row-name{
-    max-width: 100px;
+  text-overflow: clip;
+  overflow: hidden;
+  background-color: green;
 }

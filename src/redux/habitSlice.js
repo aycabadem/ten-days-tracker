@@ -1,21 +1,58 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const habitSlice = createSlice({
-  name: "habit",
+  name: "habits",
   initialState: {
-    habits: [],
+    userHabits: [],
   },
   reducers: {
-    addHabit: (state, action) => {
-      state.habits.push(action.payload);
+    setHabits: (state, action) => {
+      state.userHabits = action.payload;
     },
-    markCompleted: (state, action) => {
-      const { habitIndex, completion } = action.payload;
-      state.habits[habitIndex].completion = completion;
+    addHabit: (state, action) => {
+      state.userHabits.push(action.payload);
+    },
+    editHabit: (state, action) => {
+      const { habitId, newHabitData } = action.payload;
+      const habitIndex = state.userHabits.findIndex(
+        (habit) => habit.id === habitId
+      );
+
+      if (habitIndex !== -1) {
+        state.userHabits[habitIndex] = {
+          ...state.userHabits[habitIndex],
+          ...newHabitData,
+        };
+      }
+    },
+    deleteHabit: (state, action) => {
+      const habitId = action.payload;
+      state.userHabits = state.userHabits.filter(
+        (habit) => habit.id !== habitId
+      );
+    },
+    markHabitComplete: (state, action) => {
+      const habitId = action.payload;
+      const habitIndex = state.userHabits.findIndex(
+        (habit) => habit.id === habitId
+      );
+
+      if (habitIndex !== -1) {
+        state.userHabits[habitIndex] = {
+          ...state.userHabits[habitIndex],
+          completed: true,
+        };
+      }
     },
   },
 });
 
-export const { addHabit, markCompleted } = habitSlice.actions;
+export const {
+  setHabits,
+  addHabit,
+  editHabit,
+  deleteHabit,
+  markHabitComplete,
+} = habitSlice.actions;
 
 export default habitSlice.reducer;
