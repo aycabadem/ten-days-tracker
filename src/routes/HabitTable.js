@@ -18,29 +18,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { db, auth } from "../firebase";
 
-function createData(
-  name,
-  Day1,
-  Day2,
-  Day3,
-  Day4,
-  Day5,
-  Day6,
-  Day7,
-  Day8,
-  Day9,
-  Day10
-) {
-  return { name, Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10 };
-}
-
-//const rows = [];
-
 export default function BasicTable() {
   const dispatch = useDispatch();
-  //const userHabits = useSelector((state) => state.habits.userHabits);
+  const userHabits = useSelector((state) => state.habits.userHabits);
+  const tableRows = userHabits;
   const [habitName, setHabitName] = useState("");
-  const [tableRows, setTableRows] = useState([]);
+  //   const [tableRows, setTableRows] = useState([]);
   const [editingIndex, setEditingIndex] = useState(-1);
   const [editedHabitName, setEditedHabitName] = useState("");
 
@@ -61,7 +44,7 @@ export default function BasicTable() {
           ...doc.data(),
         }));
 
-        setTableRows(habitsData);
+        // setTableRows(habitsData);
 
         dispatch(setHabits(habitsData));
       }
@@ -86,7 +69,7 @@ export default function BasicTable() {
 
       try {
         console.log("Adding habit to Firestore...");
-        // Create a new habit object with the habit data
+
         const newHabit = {
           name: habitName,
           Day1: false,
@@ -101,15 +84,12 @@ export default function BasicTable() {
           Day10: false,
         };
 
-        // Add the new habit to Firestore
         const docRef = await habitsCollection.add(newHabit);
 
-        // Update the Redux store with the new habit data
         dispatch(addHabit({ id: docRef.id, ...newHabit }));
 
-        // Clear the input field
         setHabitName("");
-        console.log("Habit added successfully!");
+        console.log("Habit added successsfully");
       } catch (error) {
         console.error("Error adding habit to Firestore:", error);
       }
@@ -124,7 +104,7 @@ export default function BasicTable() {
   const handleSaveEdit = (index) => {
     const updatedRows = [...tableRows];
     updatedRows[index].name = editedHabitName;
-    setTableRows(updatedRows);
+    // setTableRows(updatedRows);
     setEditingIndex(-1);
     setEditedHabitName("");
   };
@@ -133,10 +113,34 @@ export default function BasicTable() {
     setEditingIndex(-1);
     setEditedHabitName("");
   };
-  const deleteHabit = (index) => {
-    const updatedRows = [...tableRows];
-    updatedRows.splice(index, 1);
-    setTableRows(updatedRows);
+  //   const deleteHabit = (index) => {
+  //     const updatedRows = [...tableRows];
+  //     updatedRows.splice(index, 1);
+  //     setTableRows(updatedRows);
+  //   };
+
+  const handleDelete = async (index) => {
+    const habitToDelete = userHabits[index];
+
+    const user = auth.currentUser;
+
+    if (user) {
+      const userId = user.uid;
+      const habitsCollection = db
+        .collection("users")
+        .doc(userId)
+        .collection("habits");
+
+      try {
+        await habitsCollection.doc(habitToDelete.id).delete();
+
+        dispatch(deleteHabit(habitToDelete.id));
+
+        console.log("Habit deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting habit from Firestore:", error);
+      }
+    }
   };
 
   return (
@@ -199,7 +203,7 @@ export default function BasicTable() {
                           <button onClick={() => handleEditHabit(index)}>
                             Edit
                           </button>
-                          <button onClick={() => deleteHabit(index)}>
+                          <button onClick={() => handleDelete(index)}>
                             Delete
                           </button>
                         </div>
@@ -207,7 +211,7 @@ export default function BasicTable() {
                     </div>
                   </TableCell>
                   <TableCell align="right">
-                    {row.Day1 ? <CustomCheckbox /> : null}
+                    {row.Day1 ? null : <CustomCheckbox />}
                   </TableCell>
                   <TableCell align="right">{row.Day2}</TableCell>
                   <TableCell align="right">{row.Day3}</TableCell>

@@ -5,7 +5,7 @@ import { userSlice } from "./authSlice";
 
 const reducers = combineReducers({
   user: userSlice.reducer,
-  habit: habitSlice.reducer,
+  habits: habitSlice.reducer,
 });
 
 export const store = configureStore({
