@@ -1,11 +1,7 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDUUGelzt4vt93J2jR-US17ZWXP7XSwLyc",
   authDomain: "days-tracker-6c778.firebaseapp.com",
@@ -15,8 +11,9 @@ const firebaseConfig = {
   appId: "1:962586790906:web:11864c75419fcd2f6cf243",
 };
 
-// Initialize Firebase
-initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-export const auth = getAuth();
-//export const storage = firebase.storage();
+const auth = firebase.auth();
+
+export { db, auth };

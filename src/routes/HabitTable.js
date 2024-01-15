@@ -8,15 +8,15 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./HabitTable.css";
 import CustomCheckbox from "./checkbox";
-// import {
-//   addHabit,
-//   editHabit,
-//   deleteHabit,
-//   markHabitComplete,
-//   setHabits,
-// } from "../redux/habitSlice";
-// import { useDispatch, useSelector } from "react-redux";
-// import { firestore, auth } from "../firebase";
+import {
+  addHabit,
+  editHabit,
+  deleteHabit,
+  markHabitComplete,
+  setHabits,
+} from "../redux/habitSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { db, auth } from "../firebase";
 
 function createData(
   name,
@@ -34,97 +34,86 @@ function createData(
   return { name, Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10 };
 }
 
-const rows = [];
+//const rows = [];
 
 export default function BasicTable() {
-  //   const dispatch = useDispatch();
-  //   const userHabits = useSelector((state) => state.habits.userHabits);
+  const dispatch = useDispatch();
+  //const userHabits = useSelector((state) => state.habits.userHabits);
   const [habitName, setHabitName] = useState("");
-  const [tableRows, setTableRows] = useState(rows);
+  const [tableRows, setTableRows] = useState([]);
   const [editingIndex, setEditingIndex] = useState(-1);
   const [editedHabitName, setEditedHabitName] = useState("");
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const user = auth.currentUser;
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = auth.currentUser;
 
-  //       if (user) {
-  //         const userId = user.uid;
+      if (user) {
+        const userId = user.uid;
 
-  //         const habitsCollection = firestore.collection(`users/${userId}/habits`);
-  //         const habitsSnapshot = await habitsCollection.get();
-  //         const habitsData = habitsSnapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           ...doc.data(),
-  //         }));
+        const habitsCollection = db
+          .collection("users")
+          .doc(userId)
+          .collection("habits");
+        const habitsSnapshot = await habitsCollection.get();
+        const habitsData = habitsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
-  //         setTableRows(habitsData);
+        setTableRows(habitsData);
 
-  //         dispatch(setHabits(habitsData));
-  //       }
-  //     };
+        dispatch(setHabits(habitsData));
+      }
+    };
 
-  //     fetchData();
-  //   }, [dispatch]);
+    fetchData();
+  }, [dispatch, habitName]);
 
-  const handleAddHabit = () => {
+  const handleAddHabit = async () => {
     if (habitName.trim() === "") {
       return;
     }
 
-    // const user = auth.currentUser;
-    // if (user) {
-    //   const userId = user.uid;
+    const user = auth.currentUser;
 
-    //   const habitsCollection = firestore.collection(`users/${userId}/habits`);
-    //   const docRef = habitsCollection.add(
-    //     habitName,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />,
-    //     <CustomCheckbox />
-    //   );
+    if (user) {
+      const userId = user.uid;
+      const habitsCollection = db
+        .collection("users")
+        .doc(userId)
+        .collection("habits");
 
-    //   dispatch(
-    //     addHabit({
-    //       id: docRef.id,
-    //       name: habitName,
-    //       Day1: <CustomCheckbox />,
-    //       Day2: <CustomCheckbox />,
-    //       Day3: <CustomCheckbox />,
-    //       Day4: <CustomCheckbox />,
-    //       Day6: <CustomCheckbox />,
-    //       Day7: <CustomCheckbox />,
-    //       Day8: <CustomCheckbox />,
-    //       Day9: <CustomCheckbox />,
-    //       Day10: <CustomCheckbox />,
-    //     })
-    //   );
+      try {
+        console.log("Adding habit to Firestore...");
+        // Create a new habit object with the habit data
+        const newHabit = {
+          name: habitName,
+          Day1: false,
+          Day2: false,
+          Day3: false,
+          Day4: false,
+          Day5: false,
+          Day6: false,
+          Day7: false,
+          Day8: false,
+          Day9: false,
+          Day10: false,
+        };
 
-    //   setHabitName("");
-    // }
+        // Add the new habit to Firestore
+        const docRef = await habitsCollection.add(newHabit);
 
-    const newRow = createData(
-      habitName,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />,
-      <CustomCheckbox />
-    );
-    setTableRows((prevRows) => [...prevRows, newRow]);
-    setHabitName("");
+        // Update the Redux store with the new habit data
+        dispatch(addHabit({ id: docRef.id, ...newHabit }));
+
+        // Clear the input field
+        setHabitName("");
+        console.log("Habit added successfully!");
+      } catch (error) {
+        console.error("Error adding habit to Firestore:", error);
+      }
+    }
   };
 
   const handleEditHabit = (index) => {
@@ -217,7 +206,9 @@ export default function BasicTable() {
                       )}
                     </div>
                   </TableCell>
-                  <TableCell align="right">{row.Day1}</TableCell>
+                  <TableCell align="right">
+                    {row.Day1 ? <CustomCheckbox /> : null}
+                  </TableCell>
                   <TableCell align="right">{row.Day2}</TableCell>
                   <TableCell align="right">{row.Day3}</TableCell>
 
