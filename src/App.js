@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import HomePage from "./routes/HomePage";
 import ProfilePage from "./routes/ProfilePage";
 import ErrorPage from "./routes/ErrorPage";
 import { loginUser, setLoading } from "./redux/authSlice";

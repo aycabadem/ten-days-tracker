@@ -6,10 +6,26 @@
 
 .upper-div {
  flex: 1;
- background-color: blue;
+ 
 }
 
 .lower-div {
  flex: 10;
- background-color: red;
+
+ width: 80%;
+ align-self: center;
+ justify-content: center;
+}
+.habitTableCell{
+ 
+   background-color: red;
+
+}
+.habitTableCell-lower{
+ 
+    max-width: 100px;
+    height: 100%;
+}
+.row-name{
+    max-width: 100px;
 }
