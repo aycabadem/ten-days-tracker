@@ -31,19 +31,19 @@ export const habitSlice = createSlice({
         (habit) => habit.id !== habitId
       );
     },
-    markHabitComplete: (state, action) => {
-      const habitId = action.payload;
-      const habitIndex = state.userHabits.findIndex(
-        (habit) => habit.id === habitId
-      );
+    // markHabitComplete: (state, action) => {
+    //   const { completed } = action.payload;
+    //   const habitIndex = state.userHabits.findIndex(
 
-      if (habitIndex !== -1) {
-        state.userHabits[habitIndex] = {
-          ...state.userHabits[habitIndex],
-          completed: true,
-        };
-      }
-    },
+    //   );
+
+    //   if (habitIndex !== -1) {
+    //     state.userHabits[habitIndex] = {
+    //       ...state.userHabits[habitIndex],
+    //       completed,
+    //     };
+    //   }
+    // },
   },
 });
 

@@ -44,6 +44,11 @@ export default function BasicTable() {
           ...doc.data(),
         }));
 
+        console.log(
+          "Habits data from Firestore:",
+          habitsSnapshot.docs[0].data().Day1
+        );
+
         // setTableRows(habitsData);
 
         dispatch(setHabits(habitsData));
@@ -85,6 +90,7 @@ export default function BasicTable() {
         };
 
         const docRef = await habitsCollection.add(newHabit);
+        console.log(newHabit);
 
         dispatch(addHabit({ id: docRef.id, ...newHabit }));
 
@@ -101,23 +107,49 @@ export default function BasicTable() {
     setEditedHabitName(tableRows[index].name);
   };
 
-  const handleSaveEdit = (index) => {
-    const updatedRows = [...tableRows];
-    updatedRows[index].name = editedHabitName;
-    // setTableRows(updatedRows);
-    setEditingIndex(-1);
-    setEditedHabitName("");
+  const handleSaveEdit = async (index) => {
+    const habitToUpdate = userHabits[index];
+
+    try {
+      const user = auth.currentUser;
+
+      if (user) {
+        const userId = user.uid;
+        const habitsCollection = db
+          .collection("users")
+          .doc(userId)
+          .collection("habits");
+
+        // Update the habit name in Firestore
+        await habitsCollection.doc(habitToUpdate.id).update({
+          name: editedHabitName,
+        });
+
+        // Update the habit name in the Redux store
+        const newHabitData = { name: editedHabitName };
+        dispatch(editHabit({ habitId: habitToUpdate.id, newHabitData }));
+
+        // Fetch updated data from Firestore
+        const habitsSnapshot = await habitsCollection.get();
+        const updatedHabitsData = habitsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        dispatch(setHabits(updatedHabitsData));
+
+        setEditingIndex(-1);
+        setEditedHabitName("");
+      }
+    } catch (error) {
+      console.error("Error updating habit in Firestore:", error);
+    }
   };
 
   const handleCancelEdit = () => {
     setEditingIndex(-1);
     setEditedHabitName("");
   };
-  //   const deleteHabit = (index) => {
-  //     const updatedRows = [...tableRows];
-  //     updatedRows.splice(index, 1);
-  //     setTableRows(updatedRows);
-  //   };
 
   const handleDelete = async (index) => {
     const habitToDelete = userHabits[index];
@@ -140,6 +172,27 @@ export default function BasicTable() {
       } catch (error) {
         console.error("Error deleting habit from Firestore:", error);
       }
+    }
+  };
+  const handleCheckboxChange = async (docId, value, index) => {
+    try {
+      const user = auth.currentUser;
+
+      if (user) {
+        const userId = user.uid;
+        const habitsCollection = db
+          .collection("users")
+          .doc(userId)
+          .collection("habits");
+
+        await habitsCollection.doc(docId).update({
+          [`Day${index}`]: value,
+        });
+
+        console.log(value);
+      }
+    } catch (error) {
+      console.error("Error updating habit completion status:", error);
     }
   };
 
@@ -211,18 +264,85 @@ export default function BasicTable() {
                     </div>
                   </TableCell>
                   <TableCell align="right">
-                    {row.Day1 ? null : <CustomCheckbox />}
+                    <CustomCheckbox
+                      completed={row.Day1}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 1);
+                      }}
+                    />
                   </TableCell>
-                  <TableCell align="right">{row.Day2}</TableCell>
-                  <TableCell align="right">{row.Day3}</TableCell>
-
-                  <TableCell align="right">{row.Day4}</TableCell>
-                  <TableCell align="right">{row.Day5}</TableCell>
-                  <TableCell align="right">{row.Day6}</TableCell>
-                  <TableCell align="right">{row.Day7}</TableCell>
-                  <TableCell align="right">{row.Day8}</TableCell>
-                  <TableCell align="right">{row.Day9}</TableCell>
-                  <TableCell align="right">{row.Day10}</TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day2}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 2);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day3}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 3);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day4}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 4);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day5}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 5);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day6}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 6);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day7}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 7);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day8}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 8);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day9}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 9);
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell align="right">
+                    <CustomCheckbox
+                      completed={row.Day10}
+                      onChange={(value) => {
+                        handleCheckboxChange(row.id, value, 10);
+                      }}
+                    />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
