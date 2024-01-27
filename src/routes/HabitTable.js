@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { db, auth } from "../firebase";
 import MyDatePicker from "../components/DatePicker";
-
+import moment from "moment";
 export default function BasicTable() {
   const dispatch = useDispatch();
   const userHabits = useSelector((state) => state.habits.userHabits);
@@ -39,15 +39,11 @@ export default function BasicTable() {
           .doc(userId)
           .collection("habits");
         const habitsSnapshot = await habitsCollection.get();
+        console.log(habitsSnapshot.docs);
         const habitsData = habitsSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
-        console.log(
-          "Habits data from Firestore:",
-          habitsSnapshot.docs[0].data().Day1
-        );
 
         // setTableRows(habitsData);
 
@@ -87,6 +83,7 @@ export default function BasicTable() {
           Day8: false,
           Day9: false,
           Day10: false,
+          startDate: selectedDate,
         };
 
         const docRef = await habitsCollection.add(newHabit);
@@ -195,7 +192,7 @@ export default function BasicTable() {
       console.error("Error updating habit completion status:", error);
     }
   };
-
+  const selectedDate = useSelector((state) => state.habits.selectedDate);
   return (
     <div className="page-container">
       <div className="upper-div">
@@ -215,21 +212,86 @@ export default function BasicTable() {
                   />
                   <button onClick={handleAddHabit}>Add Habit</button>
                 </TableCell>
-                <TableCell align="right">Day1</TableCell>
-                <TableCell align="right">Day2</TableCell>
-                <TableCell align="right">Day3</TableCell>
-                <TableCell align="right">Day4</TableCell>
-                <TableCell align="right">Day5</TableCell>
-
-                <TableCell align="right">Day6</TableCell>
-
-                <TableCell align="right">Day7</TableCell>
-
-                <TableCell align="right">Day8</TableCell>
-
-                <TableCell align="right">Day9</TableCell>
-
-                <TableCell align="right">Day10</TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(1, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(1, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(2, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(2, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(3, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(3, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(4, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(4, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(5, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(5, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(6, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(6, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(7, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(7, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(8, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(8, "day").format("dddd")}
+                  </div>
+                </TableCell>
+                <TableCell align="right">
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(9, "day").format("DD-MM-YYYY")}
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {moment(selectedDate).add(9, "day").format("dddd")}
+                  </div>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

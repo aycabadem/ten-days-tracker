@@ -1,14 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setDate } from "../redux/habitSlice";
+import { db, auth } from "../firebase";
 
 const MyDatePicker = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-
+  const dispatch = useDispatch();
+  const selectedDate = useSelector((state) => state.habits.selectedDate);
+  const user = auth.currentUser;
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    console.log(date);
+    dispatch(setDate(date));
+    if (user) {
+      const userId = user.uid;
+      db.collection("users").doc(userId).set({ activeDate: date });
+    }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userId = user.uid;
+        const userData = db.collection("users").doc(userId);
+        const userSnapshot = await userData.get();
+        console.log(userSnapshot.data());
+        console.log(userId);
+        const timestamp = userSnapshot.data().activeDate;
+        const date = timestamp.toDate(); // Convert to Date type
+        console.log(date);
+        dispatch(setDate(date));
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   return (
     <div>
@@ -20,9 +48,7 @@ const MyDatePicker = () => {
         isClearable
         placeholderText="Select a date"
       />
-      {selectedDate && (
-        <p>Selected Date: {selectedDate.toLocaleDateString()}</p>
-      )}
+      {selectedDate && <p>Selected Date: {selectedDate.toString()}</p>}
     </div>
   );
 };
