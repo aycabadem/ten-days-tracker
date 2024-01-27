@@ -6,7 +6,10 @@
 
 .upper-div {
  flex: 1;
- 
+ width: 80%;
+ align-self: center;
+ justify-content: center;
+ margin-bottom: 20px;
 }
 
 .lower-div {

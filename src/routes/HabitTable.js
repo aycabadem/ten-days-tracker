@@ -12,11 +12,11 @@ import {
   addHabit,
   editHabit,
   deleteHabit,
-  markHabitComplete,
   setHabits,
 } from "../redux/habitSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { db, auth } from "../firebase";
+import MyDatePicker from "../components/DatePicker";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
@@ -198,7 +198,9 @@ export default function BasicTable() {
 
   return (
     <div className="page-container">
-      <div className="upper-div"></div>
+      <div className="upper-div">
+        <MyDatePicker />
+      </div>
       <div className="lower-div">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
