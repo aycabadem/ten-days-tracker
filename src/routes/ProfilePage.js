@@ -43,16 +43,17 @@ const ProfilePage = () => {
 
         for (var i = 0; i < habitsData.length; i++) {
           if (
-            activeDatesSnapshot.data().activeDate &&
-            activeDatesSnapshot.data().activeDate.toDate().getTime() !==
-              habitsData[i].startDate.toDate().getTime()
+            !habitDates.some(
+              // eslint-disable-next-line no-loop-func
+              (date) =>
+                date.getTime() === habitsData[i].startDate.toDate().getTime()
+            )
           ) {
             habitDates.push(habitsData[i].startDate.toDate());
           } else {
             console.log("noliii");
           }
         }
-        habitDates.push(activeDatesSnapshot.data().activeDate.toDate());
         console.log(habitDates);
 
         setDates(habitDates);
@@ -61,9 +62,9 @@ const ProfilePage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [habits]);
 
-  const dateElements = dates.map((date) => (
+  const dateElements = dates?.map((date) => (
     <p key={date.toISOString()}>{date.toDateString()}</p>
   ));
 
