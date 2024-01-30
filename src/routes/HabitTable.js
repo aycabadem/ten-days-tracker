@@ -26,6 +26,7 @@ export default function BasicTable() {
   //   const [tableRows, setTableRows] = useState([]);
   const [editingIndex, setEditingIndex] = useState(-1);
   const [editedHabitName, setEditedHabitName] = useState("");
+  const selectedDate = useSelector((state) => state.habits.selectedDate);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,14 +46,36 @@ export default function BasicTable() {
           ...doc.data(),
         }));
 
-        // setTableRows(habitsData);
+        //demem,eee
+        //console.log(habitsData[0].startDate.toDate().getTime());
+        //console.log(habitsData.length);
+        //console.log(habitsData[3].startDate.toDate().getTime());
 
-        dispatch(setHabits(habitsData));
+        //denemne
+        const activeDates = db.collection("users").doc(userId);
+        const activeDatesSnapshot = await activeDates.get();
+        // console.log(activeDatesSnapshot.data().activeDate.toDate());
+        //denemeee
+        const habitsDataList = [];
+        for (var i = 0; i < habitsData.length; i++) {
+          if (
+            activeDatesSnapshot.data().activeDate &&
+            activeDatesSnapshot.data().activeDate.toDate().getTime() ===
+              habitsData[i].startDate.toDate().getTime()
+          ) {
+            //console.log(habitsData[i]);
+            console.log(habitsData);
+            habitsDataList.push(habitsData[i]);
+          } else {
+            console.log("noliii");
+          }
+        }
+        dispatch(setHabits(habitsDataList));
       }
     };
 
     fetchData();
-  }, [dispatch, habitName]);
+  }, [dispatch, habitName, selectedDate]);
 
   const handleAddHabit = async () => {
     if (habitName.trim() === "") {
@@ -87,7 +110,7 @@ export default function BasicTable() {
         };
 
         const docRef = await habitsCollection.add(newHabit);
-        console.log(newHabit);
+        // console.log(newHabit.startDate);
 
         dispatch(addHabit({ id: docRef.id, ...newHabit }));
 
@@ -192,7 +215,7 @@ export default function BasicTable() {
       console.error("Error updating habit completion status:", error);
     }
   };
-  const selectedDate = useSelector((state) => state.habits.selectedDate);
+
   return (
     <div className="page-container">
       <div className="upper-div">
@@ -297,7 +320,7 @@ export default function BasicTable() {
             <TableBody>
               {tableRows.map((row, index) => (
                 <TableRow
-                  key={row.name}
+                  key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">

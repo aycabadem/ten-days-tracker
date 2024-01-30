@@ -1,0 +1,96 @@
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+   }
+.profile-div{
+    flex: 1;
+    align-self: center;
+    justify-content: center;
+    background-color: pink;
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.total-div{
+    flex: 4;
+    align-self: center;
+    background-color: blue;
+    width: 80%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.tendays-div{
+    flex: 4;
+    align-self: center;
+    background-color: green;
+    width: 80%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+   
+}
+.total-lower-div{
+
+    align-self: center;
+    justify-content: center;
+    background-color: yellow;
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 25%;
+    display: flex;
+    
+}
+.total-lower-div p{
+    font-style: bold;
+    font-size: 50px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+
+}
+.tendays-upper{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 350px;
+    width: 30px;
+    background-color: red;
+    margin-left: 5px;
+    overflow-x: hidden;
+   overflow-y: auto;
+ 
+}
+.tendays-lower{
+    display: flex;
+    flex: 5;
+
+    width: 80%;
+    height: 80%;
+}
+
+.tendays-lower-div{
+    align-self: center;
+    justify-content: center;
+    background-color: yellow;
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 25%;
+    display: flex;
+}
