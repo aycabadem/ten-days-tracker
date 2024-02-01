@@ -147,13 +147,13 @@ export default function BasicTable() {
         dispatch(editHabit({ habitId: habitToUpdate.id, newHabitData }));
 
         // Fetch updated data from Firestore
-        const habitsSnapshot = await habitsCollection.get();
-        const updatedHabitsData = habitsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        // const habitsSnapshot = await habitsCollection.get();
+        // const updatedHabitsData = habitsSnapshot.docs.map((doc) => ({
+        //   id: doc.id,
+        //   ...doc.data(),
+        // }));
 
-        dispatch(setHabits(updatedHabitsData));
+        // dispatch(setHabits(updatedHabitsData));
 
         setEditingIndex(-1);
         setEditedHabitName("");
@@ -206,6 +206,9 @@ export default function BasicTable() {
           [`Day${index}`]: value,
         });
 
+        // dispatch(editHabit({ habitId: docId, [`Day${index}`]: value }));
+        const newHabitData = { [`Day${index}`]: value };
+        dispatch(editHabit({ habitId: docId, newHabitData }));
         console.log(value);
       }
     } catch (error) {

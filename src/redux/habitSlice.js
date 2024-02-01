@@ -22,7 +22,8 @@ export const habitSlice = createSlice({
       const habitIndex = state.userHabits.findIndex(
         (habit) => habit.id === habitId
       );
-
+      console.log(habitIndex);
+      console.log(newHabitData);
       if (habitIndex !== -1) {
         state.userHabits[habitIndex] = {
           ...state.userHabits[habitIndex],
@@ -39,6 +40,7 @@ export const habitSlice = createSlice({
     setDate: (state, action) => {
       state.selectedDate = action.payload;
     },
+
     // markHabitComplete: (state, action) => {
     //   const { completed } = action.payload;
     //   const habitIndex = state.userHabits.findIndex(

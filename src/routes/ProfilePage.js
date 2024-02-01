@@ -68,13 +68,16 @@ const ProfilePage = () => {
 
   //creates date elements
   const dateElements = dates?.map((date) => (
-    <p
-      key={date.toISOString()}
-      onClick={() => handleDateClick(date)}
-      style={{ cursor: "pointer" }}
-    >
-      {date.toDateString()}
-    </p>
+    <div className="pnin" tabIndex={0}>
+      <p
+        className="dateElement"
+        key={date.toISOString()}
+        onClick={() => handleDateClick(date)}
+        style={{ cursor: "pointer" }}
+      >
+        {date.toDateString()}
+      </p>
+    </div>
   ));
 
   // date picker
@@ -134,6 +137,7 @@ const ProfilePage = () => {
   const tenDayAvarage = checksOneHabit / (checksOneHabit + checksOneHabitFalse);
   console.log(tenDayAvarage);
   const compHabitAll = [];
+
   let countAll = 0;
   let checksAll = 0;
   for (let i = 0; i < habits.length; i++) {
@@ -150,50 +154,76 @@ const ProfilePage = () => {
     countAll = 0;
   }
   console.log(checksAll);
-  console.log(compHabitAll);
+  //OLMADIiiiiiiiiiiiiiiii
+  console.log(compHabitAll.length);
+  let compAvarageTotal = 0;
+  let countTotalTrue = 0;
+  let countTotalFalse = 0;
+  for (let i = 0; i < dates.length; i++) {
+    const filteredHabits = findHabitsByStartDate(habits, dates[i]);
+    console.log(dates.length);
+    let isPerfect = true;
+    for (let k = 0; k < filteredHabits.length; k++) {
+      for (let j = 1; j <= 10; j++) {
+        if (filteredHabits[k][`Day${j}`] === true) {
+          countTotalTrue++;
+        } else {
+          countTotalFalse++;
+          isPerfect = false;
+        }
+      }
+    }
+    if (isPerfect) {
+      compAvarageTotal++;
+    }
+  }
+  console.log(countTotalTrue);
+  console.log(countTotalFalse);
+  console.log(compAvarageTotal);
+  const totalAverageTenDays = compAvarageTotal / dates.length;
+  console.log(totalAverageTenDays);
+  const allHabitsCompAvatage = parseFloat(
+    countTotalTrue / (countTotalTrue + countTotalFalse)
+  ).toFixed(2);
+
   return (
     <div className="page-container">
       <div className="profile-div">{user?.username}</div>
+      <div className="ustdiv">denfdewi</div>
       <div className="total-div">
         <div className="total-lower-div">
           <p>You create {dates.length} 10 days tracker</p>
         </div>
         <div className="total-lower-div">
-          <p>complete 1 ------ days tracker</p>
+          <p>Perfect {compAvarageTotal} 10-Days Tracker</p>
         </div>
         <div className="total-lower-div">
           <p>checked {checksAll} habit</p>
         </div>
         <div className="total-lower-div">
-          <p>completion avarage %------</p>
+          <p>10-Days Tracker Completion Avarage: %{totalAverageTenDays}</p>
         </div>
         <div className="total-lower-div">
-          <div>perfect --??? 10 days</div>
+          <p>All Habits Completion Avarage: %{allHabitsCompAvatage}</p>
         </div>
       </div>
+      <div className="ustdiv">denfdewi</div>
       <div className="tendays-div">
-        <div className="tendays-upper">{dateElements}</div>
+        <div className="tendays-upper">
+          <div className="dates"> {dateElements}</div>
+        </div>
         <div className="tendays-lower">
           <div className="tendays-lower-div">
-            {/* <p>add {habits.length} different habbits</p> */}
-            you add {selectedHabits.length} different habbits
-            {selectedHabits.map((habit, index) => (
-              <div key={index}>
-                <h3>{habit.name}</h3>
-                {habit.startDate && (
-                  <p>StartDate: {habit.startDate.toDate().toDateString()}</p>
-                )}
-              </div>
-            ))}
+            <p>you add {selectedHabits.length} different habbits</p>
           </div>
           <div className="tendays-lower-div">
-            <p>complete {compHabits.length} habits</p>
+            <p>Perfect {compHabits.length} Habits</p>
           </div>
           <div className="tendays-lower-div">
             <p>checked {checksOneHabit} habit</p>
           </div>
           <div className="tendays-lower-div">
-            10 Days Tracker Completion Avarage: %{tenDayAvarage * 100}
+            <p>10 Days Tracker Completion Avarage: %{tenDayAvarage * 100}</p>
           </div>
         </div>
       </div>

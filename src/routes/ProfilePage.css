@@ -49,13 +49,13 @@
     align-items: center;
     margin-left: 5px;
     margin-right: 5px;
-    border-radius: 25%;
+    border-radius: 10%;
     display: flex;
     
 }
 .total-lower-div p{
     font-style: bold;
-    font-size: 50px;
+    font-size: 30px;
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -66,9 +66,10 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    height: 350px;
+    height: 300px;
     width: 30px;
-    background-color: red;
+    background-color: yellow;
+    
     margin-left: 5px;
     overflow-x: hidden;
    overflow-y: auto;
@@ -91,6 +92,51 @@
     align-items: center;
     margin-left: 5px;
     margin-right: 5px;
-    border-radius: 25%;
+    border-radius: 10%;
     display: flex;
+}
+.dates{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    flex-direction: column;
+    
+
+}
+.dateElement{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    border-radius: 5%;
+}
+.ustdiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.pnin{
+    background-color: blueviolet;
+    margin: 2px;
+    padding: 5px;
+    border-radius: 5%;
+    transition: background-color 0.3s;
+}
+.pnin:hover{
+    background-color: blue;
+}
+.pnin:focus{
+    outline: 4px solid red; 
 }
