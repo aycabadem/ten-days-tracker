@@ -7,9 +7,12 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.user.user);
   const habits = useSelector((state) => state.habits.allHabits);
   console.log(habits);
-
+  console.log(habits[0].Day1);
   const [dates, setDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  console.log(dates);
+
   useEffect(() => {
     const fetchData = async () => {
       const user = auth.currentUser;
@@ -28,19 +31,12 @@ const ProfilePage = () => {
           ...doc.data(),
         }));
 
-        //demem,eee
-        //console.log(habitsData[0].startDate.toDate().getTime());
-        //console.log(habitsData.length);
-        //console.log(habitsData[3].startDate.toDate().getTime());
-
-        //denemne
         const activeDates = db.collection("users").doc(userId);
         const activeDatesSnapshot = await activeDates.get();
         console.log(activeDatesSnapshot.data().activeDate.toDate());
         setSelectedDate(activeDatesSnapshot.data().activeDate.toDate());
         console.log(selectedDate);
-        //denemeee
-        //const habitsDataList = [];
+
         const habitDates = [];
 
         for (var i = 0; i < habitsData.length; i++) {
@@ -110,12 +106,28 @@ const ProfilePage = () => {
   //   return <p>no habits in this date</p>;
   // }
 
+  //ikinci deneme  comp habit bulma
+  const compHabits = [];
+  let count = 0;
+  for (let i = 0; i < selectedHabits.length; i++) {
+    for (let j = 1; j <= 10; j++) {
+      if (selectedHabits[i][`Day${j}`] === true) {
+        count++;
+      }
+      if (count === 10) {
+        compHabits.push(selectedHabits[i]);
+      }
+    }
+    count = 0;
+  }
+  console.log(count);
+  console.log(compHabits);
   return (
     <div className="page-container">
       <div className="profile-div">{user?.username}</div>
       <div className="total-div">
         <div className="total-lower-div">
-          <p>You create 2 10 days tracker</p>
+          <p>You create {dates.length} 10 days tracker</p>
         </div>
         <div className="total-lower-div">
           <p>complete 1 10 days tracker</p>
@@ -146,7 +158,7 @@ const ProfilePage = () => {
             ))}
           </div>
           <div className="tendays-lower-div">
-            <p>complete 3 habits</p>
+            <p>complete {compHabits.length} habits</p>
           </div>
           <div className="tendays-lower-div">
             <p>checked 45 times</p>
