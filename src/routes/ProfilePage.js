@@ -108,20 +108,49 @@ const ProfilePage = () => {
 
   //ikinci deneme  comp habit bulma
   const compHabits = [];
+  let checksOneHabit = 0;
+  let checksOneHabitFalse = 0;
   let count = 0;
   for (let i = 0; i < selectedHabits.length; i++) {
     for (let j = 1; j <= 10; j++) {
+      if (selectedHabits[i][`Day${j}`] === false) {
+        checksOneHabitFalse++;
+      }
       if (selectedHabits[i][`Day${j}`] === true) {
         count++;
+        checksOneHabit++;
       }
       if (count === 10) {
         compHabits.push(selectedHabits[i]);
       }
     }
+
     count = 0;
   }
+  console.log(checksOneHabitFalse);
+  console.log(checksOneHabit);
   console.log(count);
   console.log(compHabits);
+  const tenDayAvarage = checksOneHabit / (checksOneHabit + checksOneHabitFalse);
+  console.log(tenDayAvarage);
+  const compHabitAll = [];
+  let countAll = 0;
+  let checksAll = 0;
+  for (let i = 0; i < habits.length; i++) {
+    for (let j = 1; j <= 10; j++) {
+      if (habits[i][`Day${j}`] === true) {
+        countAll++;
+        checksAll++;
+      }
+      if (countAll === 10) {
+        compHabitAll.push(habits[i]);
+      }
+    }
+
+    countAll = 0;
+  }
+  console.log(checksAll);
+  console.log(compHabitAll);
   return (
     <div className="page-container">
       <div className="profile-div">{user?.username}</div>
@@ -130,16 +159,16 @@ const ProfilePage = () => {
           <p>You create {dates.length} 10 days tracker</p>
         </div>
         <div className="total-lower-div">
-          <p>complete 1 10 days tracker</p>
+          <p>complete 1 ------ days tracker</p>
         </div>
         <div className="total-lower-div">
-          <p>checked 450 times</p>
+          <p>checked {checksAll} habit</p>
         </div>
         <div className="total-lower-div">
-          <p>completion avarage %3.33</p>
+          <p>completion avarage %------</p>
         </div>
         <div className="total-lower-div">
-          <div>perfect 10 days</div>
+          <div>perfect --??? 10 days</div>
         </div>
       </div>
       <div className="tendays-div">
@@ -161,10 +190,10 @@ const ProfilePage = () => {
             <p>complete {compHabits.length} habits</p>
           </div>
           <div className="tendays-lower-div">
-            <p>checked 45 times</p>
+            <p>checked {checksOneHabit} habit</p>
           </div>
           <div className="tendays-lower-div">
-            add {selectedHabits.length} different habbits
+            10 Days Tracker Completion Avarage: %{tenDayAvarage * 100}
           </div>
         </div>
       </div>
