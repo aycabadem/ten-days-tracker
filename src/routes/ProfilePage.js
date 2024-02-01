@@ -9,7 +9,7 @@ const ProfilePage = () => {
   console.log(habits);
 
   const [dates, setDates] = useState([]);
-
+  const [selectedDate, setSelectedDate] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const user = auth.currentUser;
@@ -37,6 +37,8 @@ const ProfilePage = () => {
         const activeDates = db.collection("users").doc(userId);
         const activeDatesSnapshot = await activeDates.get();
         console.log(activeDatesSnapshot.data().activeDate.toDate());
+        setSelectedDate(activeDatesSnapshot.data().activeDate.toDate());
+        console.log(selectedDate);
         //denemeee
         //const habitsDataList = [];
         const habitDates = [];
@@ -64,9 +66,49 @@ const ProfilePage = () => {
     fetchData();
   }, [habits]);
 
+  // const dateElements = dates?.map((date) => (
+  //   <p key={date.toISOString()}>{date.toDateString()}</p>
+  // ));
+
+  //creates date elements
   const dateElements = dates?.map((date) => (
-    <p key={date.toISOString()}>{date.toDateString()}</p>
+    <p
+      key={date.toISOString()}
+      onClick={() => handleDateClick(date)}
+      style={{ cursor: "pointer" }}
+    >
+      {date.toDateString()}
+    </p>
   ));
+
+  // date picker
+  const handleDateClick = (clickedDate) => {
+    setSelectedDate(clickedDate);
+
+    console.log("clicked date:", clickedDate);
+  };
+
+  console.log(habits);
+
+  const findHabitsByStartDate = (habits, selectedDate) => {
+    return habits.filter((habit) => {
+      const habitStartDate = new Date(habit.startDate.toDate());
+      console.log(selectedDate.toDateString());
+      console.log("start date :", habitStartDate.toDateString());
+      if (habitStartDate && selectedDate) {
+        return habitStartDate.toDateString() === selectedDate.toDateString();
+      }
+      return false;
+    });
+  };
+
+  // find habits by start date
+  const selectedHabits = findHabitsByStartDate(habits, selectedDate);
+  console.log(selectedHabits);
+
+  if (selectedHabits.length === 0) {
+    return <p>no habits in this date</p>;
+  }
 
   return (
     <div className="page-container">
@@ -89,32 +131,27 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="tendays-div">
-        <div className="tendays-upper">
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-
-          <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-        </div>
+        <div className="tendays-upper">{dateElements}</div>
         <div className="tendays-lower">
           <div className="tendays-lower-div">
             {/* <p>add {habits.length} different habbits</p> */}
+            {selectedHabits.map((habit, index) => (
+              <div key={index}>
+                <h3>{habit.name}</h3>
+                {habit.startDate && (
+                  <p>StartDate: {habit.startDate.toDate().toDateString()}</p>
+                )}
+              </div>
+            ))}
           </div>
           <div className="tendays-lower-div">
-            <p>{dateElements}</p>
+            <p>complete 3 habits</p>
           </div>
           <div className="tendays-lower-div">
             <p>checked 45 times</p>
           </div>
           <div className="tendays-lower-div">
-            {/* <p>name : {habits[0].name}</p> */}
+            add {selectedHabits.length} different habbits
           </div>
         </div>
       </div>
