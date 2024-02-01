@@ -4,6 +4,7 @@ export const habitSlice = createSlice({
   name: "habits",
   initialState: {
     userHabits: [],
+    allHabits: [],
     selectedDate: null,
   },
   reducers: {
@@ -12,6 +13,9 @@ export const habitSlice = createSlice({
     },
     addHabit: (state, action) => {
       state.userHabits.push(action.payload);
+    },
+    setAllHabits: (state, action) => {
+      state.allHabits = action.payload;
     },
     editHabit: (state, action) => {
       const { habitId, newHabitData } = action.payload;
@@ -58,6 +62,7 @@ export const {
   deleteHabit,
   markHabitComplete,
   setDate,
+  setAllHabits,
 } = habitSlice.actions;
 
 export default habitSlice.reducer;

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, dispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./ProfilePage.css";
 import { db, auth } from "../firebase";
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user.user);
-  const habits = useSelector((state) => state.habits.userHabits);
+  const habits = useSelector((state) => state.habits.allHabits);
   console.log(habits);
 
   const [dates, setDates] = useState([]);
@@ -93,10 +93,10 @@ const ProfilePage = () => {
   const findHabitsByStartDate = (habits, selectedDate) => {
     return habits.filter((habit) => {
       const habitStartDate = new Date(habit.startDate.toDate());
-      console.log(selectedDate.toDateString());
+      console.log(selectedDate?.toDateString());
       console.log("start date :", habitStartDate.toDateString());
       if (habitStartDate && selectedDate) {
-        return habitStartDate.toDateString() === selectedDate.toDateString();
+        return habitStartDate.toDateString() === selectedDate?.toDateString();
       }
       return false;
     });
@@ -106,9 +106,9 @@ const ProfilePage = () => {
   const selectedHabits = findHabitsByStartDate(habits, selectedDate);
   console.log(selectedHabits);
 
-  if (selectedHabits.length === 0) {
-    return <p>no habits in this date</p>;
-  }
+  // if (selectedHabits.length === 0) {
+  //   return <p>no habits in this date</p>;
+  // }
 
   return (
     <div className="page-container">
@@ -135,6 +135,7 @@ const ProfilePage = () => {
         <div className="tendays-lower">
           <div className="tendays-lower-div">
             {/* <p>add {habits.length} different habbits</p> */}
+            you add {selectedHabits.length} different habbits
             {selectedHabits.map((habit, index) => (
               <div key={index}>
                 <h3>{habit.name}</h3>

@@ -13,6 +13,7 @@ import {
   editHabit,
   deleteHabit,
   setHabits,
+  setAllHabits,
 } from "../redux/habitSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { db, auth } from "../firebase";
@@ -45,17 +46,13 @@ export default function BasicTable() {
           id: doc.id,
           ...doc.data(),
         }));
+        console.log("yolla kardesim");
+        console.log(habitsData);
 
-        //demem,eee
-        //console.log(habitsData[0].startDate.toDate().getTime());
-        //console.log(habitsData.length);
-        //console.log(habitsData[3].startDate.toDate().getTime());
-
-        //denemne
+        dispatch(setAllHabits(habitsData));
         const activeDates = db.collection("users").doc(userId);
         const activeDatesSnapshot = await activeDates.get();
         // console.log(activeDatesSnapshot.data().activeDate.toDate());
-        //denemeee
         const habitsDataList = [];
         for (var i = 0; i < habitsData.length; i++) {
           if (
@@ -75,7 +72,7 @@ export default function BasicTable() {
     };
 
     fetchData();
-  }, [dispatch, habitName, selectedDate]);
+  }, [dispatch, selectedDate]);
 
   const handleAddHabit = async () => {
     if (habitName.trim() === "") {
