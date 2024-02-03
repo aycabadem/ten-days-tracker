@@ -40,7 +40,9 @@ const MyDatePicker = () => {
 
   return (
     <div>
-      <p>Choose a start date:</p>
+      <p style={{ color: "#76323F", fontWeight: "bold" }}>
+        Choose a start date:
+      </p>
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
@@ -48,7 +50,11 @@ const MyDatePicker = () => {
         isClearable
         placeholderText="Select a date"
       />
-      {selectedDate && <p>Selected Date: {selectedDate.toString()}</p>}
+      {selectedDate && (
+        <p style={{ color: "#565656", fontWeight: "bold" }}>
+          Selected Date: {selectedDate.toDateString()}
+        </p>
+      )}
     </div>
   );
 };

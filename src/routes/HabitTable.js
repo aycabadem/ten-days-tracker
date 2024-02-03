@@ -222,8 +222,15 @@ export default function BasicTable() {
         <MyDatePicker />
       </div>
       <div className="lower-div">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableContainer
+          component={Paper}
+          style={{ backgroundColor: "#D7CEC7" }}
+        >
+          <Table
+            sx={{ minWidth: 650 }}
+            aria-label="simple table"
+            style={{ backgroundColor: "#D7CEC7", borderRadius: "20px" }}
+          >
             <TableHead>
               <TableRow>
                 <TableCell>
@@ -233,9 +240,23 @@ export default function BasicTable() {
                     value={habitName}
                     onChange={(e) => setHabitName(e.target.value)}
                   />
-                  <button onClick={handleAddHabit}>Add Habit</button>
+                  <button
+                    style={{
+                      margin: "2px",
+                      color: "#565656",
+                      padding: "2px",
+                      borderRadius: "5px",
+                      backgroundColor: "#C09F80",
+                    }}
+                    onClick={handleAddHabit}
+                  >
+                    Add Habit
+                  </button>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).format("DD-MM-YYYY")}
                   </div>
@@ -243,7 +264,10 @@ export default function BasicTable() {
                     {moment(selectedDate).format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(1, "day").format("DD-MM-YYYY")}
                   </div>
@@ -251,7 +275,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(1, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(2, "day").format("DD-MM-YYYY")}
                   </div>
@@ -259,7 +286,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(2, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(3, "day").format("DD-MM-YYYY")}
                   </div>
@@ -267,7 +297,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(3, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(4, "day").format("DD-MM-YYYY")}
                   </div>
@@ -275,7 +308,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(4, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(5, "day").format("DD-MM-YYYY")}
                   </div>
@@ -283,7 +319,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(5, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(6, "day").format("DD-MM-YYYY")}
                   </div>
@@ -291,7 +330,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(6, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(7, "day").format("DD-MM-YYYY")}
                   </div>
@@ -299,7 +341,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(7, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(8, "day").format("DD-MM-YYYY")}
                   </div>
@@ -307,7 +352,10 @@ export default function BasicTable() {
                     {moment(selectedDate).add(8, "day").format("dddd")}
                   </div>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell
+                  align="right"
+                  style={{ color: "#76323F", fontWeight: "bold" }}
+                >
                   <div style={{ textAlign: "center" }}>
                     {moment(selectedDate).add(9, "day").format("DD-MM-YYYY")}
                   </div>
@@ -332,18 +380,58 @@ export default function BasicTable() {
                             value={editedHabitName}
                             onChange={(e) => setEditedHabitName(e.target.value)}
                           />
-                          <button onClick={() => handleSaveEdit(index)}>
+                          <button
+                            style={{
+                              margin: "2px",
+                              color: "#565656",
+                              padding: "2px",
+                              borderRadius: "5px",
+                              backgroundColor: "#C09F80",
+                            }}
+                            onClick={() => handleSaveEdit(index)}
+                          >
                             Save
                           </button>
-                          <button onClick={handleCancelEdit}>Cancel</button>
+                          <button
+                            style={{
+                              margin: "2px",
+                              color: "#565656",
+                              padding: "2px",
+                              borderRadius: "5px",
+                              backgroundColor: "#C09F80",
+                            }}
+                            onClick={handleCancelEdit}
+                          >
+                            Cancel
+                          </button>
                         </div>
                       ) : (
                         <div className="habitTableCell-lower">
-                          <div className="row-name">{row.name}</div>
-                          <button onClick={() => handleEditHabit(index)}>
+                          <div className="row-name">
+                            <p className="row-p">{row.name}</p>
+                          </div>
+                          <button
+                            style={{
+                              margin: "2px",
+                              color: "#565656",
+                              padding: "2px",
+                              borderRadius: "5px",
+                              backgroundColor: "#C09F80",
+                            }}
+                            onClick={() => handleEditHabit(index)}
+                          >
                             Edit
                           </button>
-                          <button onClick={() => handleDelete(index)}>
+                          <button
+                            style={{
+                              margin: "2px",
+                              color: "#565656",
+                              padding: "2px",
+                              borderRadius: "5px",
+                              backgroundColor: "#C09F80",
+                            }}
+                            onClick={() => handleDelete(index)}
+                          >
                             Delete
                           </button>
                         </div>

@@ -5,8 +5,8 @@
   }
   
   .navbar {
-    margin-bottom: 20px;
-    background: #2a914e;
+    /* margin-bottom: 20px; */
+    background: #76323F;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@
   }
   
   .navbar-logo {
-    color: #fff;
+    color: #D7CEC7;
     justify-self: start;
     cursor: pointer;
     text-decoration: none;
@@ -60,11 +60,11 @@
   }
   
   .nav-item:hover {
-    border-bottom: 2px solid #d1e8d9;
+    border-bottom: 2px solid #D7CEC7;
   }
   
   .nav-links {
-    color: #fff;
+    color: #D7CEC7;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -73,7 +73,7 @@
   }
   
   .activated {
-    color: #d1e8d9;
+    color: #D7CEC7;
   }
   
 
@@ -81,15 +81,23 @@
   .navbar-button{
         margin-right: 20px;
         height: 40px;
-        width: 60px;
+        width: 120px;
         border-radius: 1rem;
         border: 1px solid grey;
-        background-color: #d1e8d9;
+        background-color: #D7CEC7;
         font-weight: bold;
-        color:#2a914e;
+        color:#76323F;
+        font-size: 14px;
+        
     }
 
     .navbar-button:hover{
-        background-color: #2a914e;
-        color: #fff;
+      font-size: 16px;
+        
     }
+    .navbar-button:after{
+      color:#76323F;
+     
+      transition: 0.5s;
+    }
+   

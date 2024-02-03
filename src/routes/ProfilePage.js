@@ -199,9 +199,15 @@ const ProfilePage = () => {
 
   return (
     <div className="page-container">
-      <div className="profile-div">{user?.username}</div>
+      <div className="profile-div">
+        <p style={{ color: "#565656", fontWeight: "bold", fontSize: "24px" }}>
+          {user?.username.toUpperCase()}
+        </p>
+      </div>
       <div className="ustdiv">
-        <p>Total</p>
+        <p style={{ color: "#565656", fontWeight: "bold", fontSize: "20px" }}>
+          Total
+        </p>
       </div>
       <div className="total-div">
         <div className="total-lower-div">
@@ -235,11 +241,15 @@ const ProfilePage = () => {
         </div>
       </div>
       <div className="ustdiv">
-        <p>{showDate ? showDate : "Pick the Starting Date"}</p>
+        <p style={{ color: "#565656", fontWeight: "bold", fontSize: "20px" }}>
+          {showDate ? showDate : "Pick the Starting Date"}
+        </p>
       </div>
       <div className="tendays-div">
         <div className="tendays-upper">
-          <div className="dates"> {dateElements}</div>
+          <div className="dates">
+            <p style={{ color: "#C09F80" }}>{dateElements}</p>
+          </div>
         </div>
         <div className="tendays-lower">
           <div className="tendays-lower-div">
@@ -261,7 +271,9 @@ const ProfilePage = () => {
           <div className="tendays-lower-div">
             <p>
               Completion Avarage:
-              <div className="simple">%{tenDayAvarage * 100}</div>
+              <div className="simple">
+                %{parseFloat(tenDayAvarage * 100).toFixed(2)}
+              </div>
             </p>
           </div>
         </div>

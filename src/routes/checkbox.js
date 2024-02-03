@@ -20,7 +20,7 @@ const CustomCheckbox = ({ completed, onChange }) => {
       onChange={handleChange}
       inputProps={{ "aria-label": "controlled" }}
       style={{
-        color: "#2a914e",
+        color: "#C09F80",
       }}
     />
   );
