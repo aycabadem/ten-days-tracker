@@ -16,7 +16,7 @@
  
   
   .auth__more {
-    border: 5px solid #2a914e;
+    border: 5px solid #76323F;
     border-radius: 3rem;
     padding: 20px;
     margin-right: 150px;
@@ -37,7 +37,7 @@
     border: 0;
     font-weight: bolder;
     font-size: 16px;
-    color: #2a914e;
+    color: #76323F;
   }
   
   .auth__more > span > button:hover {

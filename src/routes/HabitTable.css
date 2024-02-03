@@ -77,4 +77,12 @@ margin-bottom: 20px;
  .habitInput:focus::placeholder {
   color: transparent;
  }
- 
+ .editingDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #D7CEC7;
+ }

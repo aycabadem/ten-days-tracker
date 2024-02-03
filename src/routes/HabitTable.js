@@ -234,136 +234,44 @@ export default function BasicTable() {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <input
-                    className="habitInput"
-                    type="text"
-                    placeholder="Habit name"
-                    value={habitName}
-                    onChange={(e) => setHabitName(e.target.value)}
-                  />
-                  <button
-                    style={{
-                      margin: "2px",
-                      color: "#565656",
-                      padding: "2px",
-                      borderRadius: "5px",
-                      backgroundColor: "#C09F80",
-                    }}
-                    onClick={handleAddHabit}
-                  >
-                    Add Habit
-                  </button>
+                  {selectedDate ? (
+                    <input
+                      className="habitInput"
+                      type="text"
+                      placeholder="Habit name"
+                      value={habitName}
+                      onChange={(e) => setHabitName(e.target.value)}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {selectedDate ? (
+                    <button
+                      style={{
+                        margin: "2px",
+                        color: "#565656",
+                        padding: "2px",
+                        borderRadius: "5px",
+                        backgroundColor: "#C09F80",
+                      }}
+                      onClick={handleAddHabit}
+                    >
+                      Add Habit
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(1, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(1, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(2, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(2, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(3, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(3, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(4, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(4, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(5, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(5, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(6, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(6, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(7, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(7, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(8, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(8, "day").format("dddd")}
-                  </div>
-                </TableCell>
-                <TableCell
-                  align="right"
-                  style={{ color: "#76323F", fontWeight: "bold" }}
-                >
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(9, "day").format("DD-MM-YYYY")}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {moment(selectedDate).add(9, "day").format("dddd")}
-                  </div>
-                </TableCell>
+                {dateCell(selectedDate, 0)}
+                {dateCell(selectedDate, 1)}
+                {dateCell(selectedDate, 2)}
+                {dateCell(selectedDate, 3)}
+                {dateCell(selectedDate, 4)}
+                {dateCell(selectedDate, 5)}
+                {dateCell(selectedDate, 6)}
+                {dateCell(selectedDate, 7)}
+                {dateCell(selectedDate, 8)}
+                {dateCell(selectedDate, 9)}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -375,8 +283,9 @@ export default function BasicTable() {
                   <TableCell component="th" scope="row">
                     <div className="habitTableCell">
                       {editingIndex === index ? (
-                        <div>
+                        <div className="editingDiv">
                           <input
+                            className="habitInput"
                             type="text"
                             value={editedHabitName}
                             onChange={(e) => setEditedHabitName(e.target.value)}
@@ -526,5 +435,21 @@ export default function BasicTable() {
         </TableContainer>
       </div>
     </div>
+  );
+}
+function dateCell(selectedDate, index) {
+  return (
+    <TableCell align="right" style={{ color: "#76323F", fontWeight: "bold" }}>
+      <div style={{ textAlign: "center" }}>
+        {selectedDate
+          ? moment(selectedDate).add(index, "day").format("DD-MM-YYYY")
+          : ""}
+      </div>
+      <div style={{ textAlign: "center" }}>
+        {selectedDate
+          ? moment(selectedDate).add(index, "day").format("dddd")
+          : ""}
+      </div>
+    </TableCell>
   );
 }
