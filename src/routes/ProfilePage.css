@@ -43,6 +43,7 @@
 
     align-self: center;
     justify-content: center;
+    align-items: center;
     background-color: yellow;
     width: 80%;
     height: 80%;
@@ -56,11 +57,13 @@
 .total-lower-div p{
     font-style: bold;
     font-size: 30px;
-    align-items: center;
     text-align: center;
-    justify-content: center;
-    align-self: center;
+    
+   
 
+}
+.tendays-lower-div{
+    text-align: center;
 }
 .tendays-upper{
     display: flex;
@@ -128,15 +131,33 @@
     margin-bottom: 10px;
 }
 .pnin{
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    
     margin: 2px;
-    padding: 5px;
+    padding: 15px;
     border-radius: 5%;
     transition: background-color 0.3s;
 }
 .pnin:hover{
-    background-color: blue;
+    background-color: red;
 }
 .pnin:focus{
     outline: 4px solid red; 
+}
+
+
+.simple {
+    border-radius: 25%;
+   
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }

@@ -7,10 +7,10 @@ const ProfilePage = () => {
   const user = useSelector((state) => state.user.user);
   const habits = useSelector((state) => state.habits.allHabits);
   console.log(habits);
-  console.log(habits[0].Day1);
+  //console.log(habits[0].Day1);
   const [dates, setDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
-
+  console.log(selectedDate);
   console.log(dates);
 
   useEffect(() => {
@@ -186,44 +186,83 @@ const ProfilePage = () => {
     countTotalTrue / (countTotalTrue + countTotalFalse)
   ).toFixed(2);
 
+  // let showDate = "";
+  // if (selectedHabits !== undefined) {
+  //   selectedHabits[0].startDate.toDate().toDateString();
+  // }
+
+  let showDate = "";
+  if (selectedDate !== null) {
+    showDate = selectedDate.toDateString();
+  }
+  console.log(showDate);
+
   return (
     <div className="page-container">
       <div className="profile-div">{user?.username}</div>
-      <div className="ustdiv">denfdewi</div>
+      <div className="ustdiv">
+        <p>Total</p>
+      </div>
       <div className="total-div">
         <div className="total-lower-div">
-          <p>You create {dates.length} 10 days tracker</p>
+          <p>
+            You create<div className="simple">{dates.length}</div>10 days
+            tracker
+          </p>
         </div>
         <div className="total-lower-div">
-          <p>Perfect {compAvarageTotal} 10-Days Tracker</p>
+          <p>
+            Perfect<div className="simple">{compAvarageTotal}</div>10-Days
+            Tracker
+          </p>
         </div>
         <div className="total-lower-div">
-          <p>checked {checksAll} habit</p>
+          <p>
+            Checked <div className="simple">{checksAll}</div>Habit
+          </p>
         </div>
         <div className="total-lower-div">
-          <p>10-Days Tracker Completion Avarage: %{totalAverageTenDays}</p>
+          <p>
+            10-Days Tracker Completion Avarage:
+            <div className="simple">%{totalAverageTenDays}</div>
+          </p>
         </div>
         <div className="total-lower-div">
-          <p>All Habits Completion Avarage: %{allHabitsCompAvatage}</p>
+          <p>
+            All Habits Completion Avarage:
+            <div className="simple">%{allHabitsCompAvatage}</div>
+          </p>
         </div>
       </div>
-      <div className="ustdiv">denfdewi</div>
+      <div className="ustdiv">
+        <p>{showDate ? showDate : "Pick the Starting Date"}</p>
+      </div>
       <div className="tendays-div">
         <div className="tendays-upper">
           <div className="dates"> {dateElements}</div>
         </div>
         <div className="tendays-lower">
           <div className="tendays-lower-div">
-            <p>you add {selectedHabits.length} different habbits</p>
+            <p>
+              Added <div className="simple">{selectedHabits.length}</div>{" "}
+              Different Habbit
+            </p>
           </div>
           <div className="tendays-lower-div">
-            <p>Perfect {compHabits.length} Habits</p>
+            <p>
+              Perfect<div className="simple">{compHabits.length}</div>Habit
+            </p>
           </div>
           <div className="tendays-lower-div">
-            <p>checked {checksOneHabit} habit</p>
+            <p>
+              Checked <div className="simple">{checksOneHabit}</div>Habit
+            </p>
           </div>
           <div className="tendays-lower-div">
-            <p>10 Days Tracker Completion Avarage: %{tenDayAvarage * 100}</p>
+            <p>
+              Completion Avarage:
+              <div className="simple">%{tenDayAvarage * 100}</div>
+            </p>
           </div>
         </div>
       </div>
