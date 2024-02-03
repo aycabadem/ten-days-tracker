@@ -40,10 +40,18 @@ const MyDatePicker = () => {
 
   return (
     <div>
-      <p style={{ color: "#76323F", fontWeight: "bold" }}>
+      <p
+        style={{
+          color: "#76323F",
+          fontWeight: "bold",
+          fontSize: "16px",
+          marginBottom: "5px",
+        }}
+      >
         Choose a start date:
       </p>
       <DatePicker
+        wrapperClassName="datePicker"
         selected={selectedDate}
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy"
@@ -51,7 +59,14 @@ const MyDatePicker = () => {
         placeholderText="Select a date"
       />
       {selectedDate && (
-        <p style={{ color: "#565656", fontWeight: "bold" }}>
+        <p
+          style={{
+            color: "#565656",
+            fontWeight: "bold",
+            fontSize: "16px",
+            marginTop: "5px",
+          }}
+        >
           Selected Date: {selectedDate.toDateString()}
         </p>
       )}

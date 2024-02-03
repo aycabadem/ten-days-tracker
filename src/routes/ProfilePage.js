@@ -198,7 +198,7 @@ const ProfilePage = () => {
   console.log(showDate);
 
   return (
-    <div className="page-container">
+    <div className="page-container-profile">
       <div className="profile-div">
         <p style={{ color: "#565656", fontWeight: "bold", fontSize: "24px" }}>
           {user?.username.toUpperCase()}
@@ -230,7 +230,9 @@ const ProfilePage = () => {
         <div className="total-lower-div">
           <p>
             10-Days Tracker Completion Avarage:
-            <div className="simple">%{totalAverageTenDays}</div>
+            <div className="simple">
+              %{parseFloat(totalAverageTenDays).toFixed(2)}
+            </div>
           </p>
         </div>
         <div className="total-lower-div">
@@ -248,7 +250,15 @@ const ProfilePage = () => {
       <div className="tendays-div">
         <div className="tendays-upper">
           <div className="dates">
-            <p style={{ color: "#C09F80" }}>{dateElements}</p>
+            <p
+              style={{
+                color: "#C09F80",
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            >
+              {dateElements}
+            </p>
           </div>
         </div>
         <div className="tendays-lower">

@@ -235,6 +235,7 @@ export default function BasicTable() {
               <TableRow>
                 <TableCell>
                   <input
+                    className="habitInput"
                     type="text"
                     placeholder="Habit name"
                     value={habitName}

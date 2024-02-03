@@ -1,48 +1,80 @@
 .page-container {
- display: flex;
- flex-direction: column;
- height: 100vh;
- background-color:  #D7CEC7;
-}
-
-.upper-div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color:  #D7CEC7;
+  position: relative;
+  width: 100%;
+ }
+ 
+ .upper-div {
   margin-top: 20px;
- flex: 1;
- width: 80%;
- align-self: center;
- justify-content: center;
- margin-bottom: 20px;
-}
+flex: 1;
+width: 80%;
+align-self: center;
+justify-content: center;
+margin-bottom: 20px;
+display: flex;
+ }
+ 
+ .lower-div {
+  flex: 10;
 
-.lower-div {
- flex: 10;
 
- width: 80%;
- 
- align-self: center;
- justify-content: center;
-}
-.habitTableCell{
- 
-  background-color: #D7CEC7;  
- 
-
-}
-.habitTableCell-lower{
- 
-   
-    height: 100%;
-    background-color: #D7CEC7;  
-    overflow-y: auto;
-}
-.row-name{
-  text-overflow: clip;
-  overflow: hidden;
-  background-color: #D7CEC7;
+width: 80%;
+align-self: center;
+justify-content: center;
+margin-bottom: 20px;
+ }
+ .habitTableCell{
   
-}
-.row-p{
+   background-color: #D7CEC7;  
+  
+ 
+ }
+ .habitTableCell-lower{
+  
+    
+     height: 100%;
+     background-color: #D7CEC7;  
+
+ }
+ .row-name{
+ 
+
+  width: 200px;
+   
+ }
+ .row-p{
   color: #565656;
+ font-size: 14px;
+ font-weight: bold;
+ width: 300px;
+ height: auto;
+ word-wrap: break-word;
+ overflow-wrap: break-word;
+ }
+ .habitInput{
+  max-width: 200px;
+  width: 80%;
+  height: 30px;
+  background-color: #D7CEC7;
+  border-radius: 10px;
+  border: 1px solid #565656;
+  text-align: center;
   font-size: 14px;
   font-weight: bold;
-}
+  color: #565656;
+  text-overflow: clip;
+  overflow: hidden;
+  resize: none;
+ }
+ .habitInput:focus{
+  outline: none;
+ 
+ 
+ }
+ .habitInput:focus::placeholder {
+  color: transparent;
+ }
+ 

@@ -1,8 +1,11 @@
 
-.page-container {
+.page-container-profile {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color:  #D7CEC7;
+    position: relative;
+    width: 100%;
    }
 .profile-div{
     flex: 1;
@@ -153,10 +156,11 @@
     transition: background-color 0.3s;
 }
 .pnin:hover{
-    background-color: red;
+    margin-top: 2px;
+    background-color: #565656;
 }
 .pnin:focus{
-    outline: 4px solid red; 
+    outline: 4px solid #565656; 
 }
 
 
