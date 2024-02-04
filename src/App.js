@@ -28,11 +28,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "/ten-days-tracker",
         element: <BasicTable />,
       },
       {
-        path: "/profile",
+        path: "/ten-days-tracker/profile",
         element: <ProfilePage />,
       },
     ],
