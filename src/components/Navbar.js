@@ -17,14 +17,14 @@ const Navbar = () => {
     <>
       <nav className="navbar">
         <div className="navbar-container container">
-          <Link to="/" className="navbar-logo">
+          <Link to="/ten-days-tracker" className="navbar-logo">
             10 Days Tracker
           </Link>
 
           <ul className="nav-menu">
             <li className="nav-item">
               <NavLink
-                to="/"
+                to="/ten-days-tracker"
                 className={({ isActive }) =>
                   "nav-links" + (isActive ? " activated" : "")
                 }
@@ -34,7 +34,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink
-                to="/profile"
+                to="/ten-days-tracker/profile"
                 className={({ isActive }) =>
                   "nav-links" + (isActive ? " activated" : "")
                 }
