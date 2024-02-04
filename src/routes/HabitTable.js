@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./HabitTable.css";
-import CustomCheckbox from "./checkbox";
+import CustomCheckbox from "../components/checkbox";
 import {
   addHabit,
   editHabit,
