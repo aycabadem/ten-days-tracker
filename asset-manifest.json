@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ten-days-tracker/static/css/main.a926f716.css",
+    "main.js": "/ten-days-tracker/static/js/main.aab7c274.js",
+    "index.html": "/ten-days-tracker/index.html",
+    "main.a926f716.css.map": "/ten-days-tracker/static/css/main.a926f716.css.map",
+    "main.aab7c274.js.map": "/ten-days-tracker/static/js/main.aab7c274.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a926f716.css",
+    "static/js/main.aab7c274.js"
+  ]
+}
