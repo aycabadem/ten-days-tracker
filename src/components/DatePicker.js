@@ -28,8 +28,8 @@ const MyDatePicker = () => {
         const userSnapshot = await userData.get();
         console.log(userSnapshot.data());
         console.log(userId);
-        const timestamp = userSnapshot.data().activeDate;
-        const date = timestamp.toDate(); // Convert to Date type
+        const timestamp = userSnapshot.data()?.activeDate;
+        const date = timestamp?.toDate(); // Convert to Date type
         console.log(date);
         dispatch(setDate(date));
       }

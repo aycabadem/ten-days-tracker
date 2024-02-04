@@ -56,8 +56,8 @@ export default function BasicTable() {
         const habitsDataList = [];
         for (var i = 0; i < habitsData.length; i++) {
           if (
-            activeDatesSnapshot.data().activeDate &&
-            activeDatesSnapshot.data().activeDate.toDate().getTime() ===
+            activeDatesSnapshot.data()?.activeDate &&
+            activeDatesSnapshot.data()?.activeDate.toDate().getTime() ===
               habitsData[i].startDate.toDate().getTime()
           ) {
             //console.log(habitsData[i]);
@@ -243,7 +243,7 @@ export default function BasicTable() {
                       onChange={(e) => setHabitName(e.target.value)}
                     />
                   ) : (
-                    ""
+                    <p style={{ color: "#76323F" }}>No date selected</p>
                   )}
                   {selectedDate ? (
                     <button

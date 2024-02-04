@@ -68,7 +68,7 @@
     font-style: bold;
     font-size: 30px;
     text-align: center;
-    color:#C09F80;
+    color:#D7CEC7;
     
    
 
@@ -83,12 +83,28 @@
     height: 300px;
     width: 30px;
     background-color: #76323F;
-    
     margin-left: 5px;
     overflow-x: hidden;
-   overflow-y: auto;
- 
-}
+    overflow-y: auto;
+
+}    ::-webkit-scrollbar {
+        width: 8px;
+   
+        }
+        
+        ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #D7CEC7; 
+        border-radius: 15px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+        background:#D7CEC7; 
+        border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+        background:#C09F80
+        }
 .tendays-lower{
     display: flex;
     flex: 5;
@@ -113,7 +129,7 @@
     font-style: bold;
     font-size: 30px;
     text-align: center;
-    color:#C09F80;
+    color:#D7CEC7;
 }
 .dates{
     display: flex;
@@ -134,7 +150,6 @@
     flex-direction: column;
     margin-top: 10px;
     margin-bottom: 10px;
-    
     border-radius: 5%;
 }
 .ustdiv{
@@ -149,7 +164,7 @@
 }
 .pnin{
     /* background-color: blueviolet; */
-    
+   
     margin: 2px;
     padding: 15px;
     border-radius: 5%;
@@ -157,16 +172,16 @@
 }
 .pnin:hover{
     margin-top: 2px;
-    background-color: #565656;
+    background-color: #C09F80;
 }
 .pnin:focus{
-    outline: 4px solid #565656; 
+    outline: 4px solid #C09F80; 
 }
 
 
 .simple {
     border-radius: 25%;
-    color: #C09F80;
+    color: #D7CEC7;
     text-align: center;
     align-items: center;
     justify-content: center;
