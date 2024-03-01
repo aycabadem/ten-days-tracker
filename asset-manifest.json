@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ten-days-tracker/static/css/main.a926f716.css",
-    "main.js": "/ten-days-tracker/static/js/main.8f17659e.js",
+    "main.css": "/ten-days-tracker/static/css/main.209eeb9c.css",
+    "main.js": "/ten-days-tracker/static/js/main.90354bb4.js",
     "index.html": "/ten-days-tracker/index.html",
-    "main.a926f716.css.map": "/ten-days-tracker/static/css/main.a926f716.css.map",
-    "main.8f17659e.js.map": "/ten-days-tracker/static/js/main.8f17659e.js.map"
+    "main.209eeb9c.css.map": "/ten-days-tracker/static/css/main.209eeb9c.css.map",
+    "main.90354bb4.js.map": "/ten-days-tracker/static/js/main.90354bb4.js.map"
   },
   "entrypoints": [
-    "static/css/main.a926f716.css",
-    "static/js/main.8f17659e.js"
+    "static/css/main.209eeb9c.css",
+    "static/js/main.90354bb4.js"
   ]
 }
