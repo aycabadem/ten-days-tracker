@@ -62,7 +62,7 @@
   .nav-item:hover {
     border-bottom: 2px solid #D7CEC7;
   }
-  
+
   .nav-links {
     color: #D7CEC7;
     display: flex;
@@ -73,7 +73,7 @@
   }
   
   .activated {
-    color: #D7CEC7;
+    color: #C09F80;
   }
   
 

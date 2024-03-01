@@ -28,6 +28,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   "nav-links" + (isActive ? " activated" : "")
                 }
+                end
               >
                 Home
               </NavLink>
